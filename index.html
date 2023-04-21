@@ -37,17 +37,17 @@
                             <div class="col-3">
                                 <input
                                     type="text"
-                                    class="form-control"
-                                    placeholder="컬럼명"
-                                    aria-label="컬럼명"
+                                    class="form-control columnname"
+                                    placeholder="ColumnName"
+                                    aria-label="ColumnName"
                                 />
                             </div>
                             <div class="col-5">
                                 <input
                                     type="text"
-                                    class="form-control"
-                                    placeholder="입력값"
-                                    aria-label="입력값"
+                                    class="form-control inputvalue"
+                                    placeholder="InputValue"
+                                    aria-label="InputValue"
                                 />
                             </div>
                             <div class="col-3">
@@ -57,15 +57,16 @@
                                     aria-label="Floating label select example"
                                 >
                                     <option selected value="string">
-                                        문자열
+                                        String
                                     </option>
-                                    <option value="number">숫자</option>
+                                    <option value="number">Number</option>
                                 </select>
                             </div>
                             <div class="col-1">
                                 <button
                                     type="button"
                                     class="btn btn-outline-danger fw-bold remove-rows"
+                                    onclick=""
                                 >
                                     -
                                 </button>
@@ -94,7 +95,7 @@
                 </div>
             </div>
             <div class="footer d-flex justify-content-end mt-3">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" id="btnGetResult">
                     Get Result
                 </button>
             </div>
