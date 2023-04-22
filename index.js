@@ -4,25 +4,34 @@ var removeRows = document.querySelectorAll(".remove-rows");
 var addBtn = document.querySelector("#addRow");
 var getResultBtn = document.querySelector("#btnGetResult");
 // 한줄추가 버튼 클릭시
-addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener("click", function () {
+addBtn.addEventListener("click", function () {
     var addedRow = addedRows[0].cloneNode(true); // true:요소의 하위 요소까지 복사
+    var addedRowElem = addedRow;
+    addedRowElem
+        .querySelector(".remove-rows")
+        .addEventListener("click", deleteRow);
+    addedRowElem.querySelector(".columnname").value = "";
+    addedRowElem.querySelector(".inputvalue").value = "";
+    addedRowElem.querySelector("#floatingSelect").value =
+        "string";
     wrapperRows === null || wrapperRows === void 0 ? void 0 : wrapperRows.appendChild(addedRow);
-    wrapperRows === null || wrapperRows === void 0 ? void 0 : wrapperRows.addEventListener("click", deleteRow);
 });
 // 한줄삭제 버튼 클릭시
 removeRows.forEach(function (e) {
     e.addEventListener("click", deleteRow);
 });
 // 데이터 변환 결과 생성
-getResultBtn === null || getResultBtn === void 0 ? void 0 : getResultBtn.addEventListener("click", function () {
+getResultBtn.addEventListener("click", function () {
     var rows = document.querySelectorAll(".added-rows");
     var rowsResult = [];
     rows.forEach(function (e) {
-        var _a, _b, _c;
+        var columnName = e.querySelector(".columnname");
+        var inputValue = e.querySelector(".inputvalue");
+        var columnType = e.querySelector("#floatingSelect");
         rowsResult.push({
-            columnName: (_a = e.querySelector(".columnname")) === null || _a === void 0 ? void 0 : _a.value,
-            inputValue: (_b = e.querySelector(".inputvalue")) === null || _b === void 0 ? void 0 : _b.value,
-            columnType: (_c = e.querySelector("#floatingSelect")) === null || _c === void 0 ? void 0 : _c.value,
+            columnName: columnName.value,
+            inputValue: inputValue.value,
+            columnType: columnType.value,
         });
     });
     console.log(rowsResult);

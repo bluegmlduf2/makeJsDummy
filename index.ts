@@ -1,6 +1,6 @@
 type inputType = {
     columnName: string;
-    columnValue: string;
+    inputValue: string;
     columnType: string;
 };
 
@@ -11,10 +11,17 @@ const addBtn = document.querySelector("#addRow");
 const getResultBtn = document.querySelector("#btnGetResult");
 
 // 한줄추가 버튼 클릭시
-addBtn?.addEventListener("click", () => {
+addBtn!.addEventListener("click", () => {
     const addedRow = addedRows[0].cloneNode(true); // true:요소의 하위 요소까지 복사
+    const addedRowElem = addedRow as Element;
+    addedRowElem
+        .querySelector(".remove-rows")!
+        .addEventListener("click", deleteRow);
+    (addedRowElem.querySelector(".columnname") as HTMLInputElement).value = "";
+    (addedRowElem.querySelector(".inputvalue") as HTMLInputElement).value = "";
+    (addedRowElem.querySelector("#floatingSelect") as HTMLInputElement).value =
+        "string";
     wrapperRows?.appendChild(addedRow);
-    wrapperRows?.addEventListener("click", deleteRow);
 });
 
 // 한줄삭제 버튼 클릭시
@@ -23,14 +30,20 @@ removeRows.forEach((e) => {
 });
 
 // 데이터 변환 결과 생성
-getResultBtn?.addEventListener("click", () => {
+getResultBtn!.addEventListener("click", () => {
     const rows = document.querySelectorAll(".added-rows");
     const rowsResult: inputType[] = [];
     rows.forEach((e) => {
+        const columnName = e.querySelector(".columnname") as HTMLInputElement;
+        const inputValue = e.querySelector(".inputvalue") as HTMLInputElement;
+        const columnType = e.querySelector(
+            "#floatingSelect"
+        ) as HTMLInputElement;
+
         rowsResult.push({
-            columnName: e.querySelector(".columnname")?.value,
-            inputValue: e.querySelector(".inputvalue")?.value,
-            columnType: e.querySelector("#floatingSelect")?.value,
+            columnName: columnName.value,
+            inputValue: inputValue.value,
+            columnType: columnType.value,
         });
     });
     console.log(rowsResult);
